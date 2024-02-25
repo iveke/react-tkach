@@ -1,4 +1,7 @@
-@import "../node_modules/modern-normalize/modern-normalize.css";
+import "../node_modules/modern-normalize/modern-normalize.css";
+import styled from "styled-components";
+
+export const GlobalStyle = styled.createGlobalStyle`
 
 * Box sizing rules */ *,
 *::before,
@@ -109,4 +112,4 @@ html {
   ::-webkit-scrollbar-thumb:hover {
     background: #6191ff;
   }
-}
+}`;
