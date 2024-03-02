@@ -1,12 +1,13 @@
 
+import * as yup from "yup";
 import Clicker from "components/BtnStep/BtnStep";
-import { FormToDo } from "components/FormToDo/FormToDo.jsx";
+import FormLogin from "components/FormToDo/FormToDo.jsx";
 import { ListToDo } from "components/ListToDo/ListToDo.jsx";
 
 function App() {
   return (
     <main style={{padding:50}}>
-      <FormToDo />
+      <FormLogin />
       <ListToDo />
       <Clicker />
     </main>
