@@ -53,5 +53,7 @@ export const Level = styled.div`
   justify-content: center;
   width: 25px;
   height: 25px;
-  border: 1px solid #000;
+  border: 1px solid ${(props)=> getColorLevel(props)};
 `;
+
+

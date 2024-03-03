@@ -1,21 +1,23 @@
-import { Form, Input } from "./FormToDo.style";
+import { Btn, Form, Input, Section, Textrea } from "./FormToDo.style";
 import { Component } from "react";
 
+const intialValue = {
+  description: "",
+  title: "",
+  level: "1",
+};
+
 class FormLogin extends Component {
-  state = {
-    email: "",
-    name: "",
-    title: "",
-    agree: false,
-  };
+  state = intialValue;
   handleChange = (e) => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
-    console.log(name, value);
   };
-  handleChangeCheckBox = (e) => {
-    this.setState({agree: e.target.checked})
-  }
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.onAdd({...this.state, level: Number(this.state.level)})
+    this.setState(intialValue);
+  };
 
   render() {
     return (
@@ -27,19 +29,24 @@ class FormLogin extends Component {
           value={this.state.title}
           onChange={this.handleChange}
         />
-        <textarea
+        <Textrea
           name="description"
           cols="30"
           rows="4"
           placeholder="enter descriptiton"
-        ></textarea>
-        <select name="level">
+          value={this.state.description}
+          onChange={this.handleChange}
+        ></Textrea>
+        <Section
+          name="level"
+          value={this.state.level}
+          onChange={this.handleChange}
+        >
           <option value="1"> level 1</option>
-          <option value="2"> level 2</option>
-          <option value="3"> level 3 </option>
-        </select>
-        
-            <Input type="checkbox"  value={this.state.agree} onChange={this.handleChangeCheckBox}/>
+          <option value={2}> level 2</option>
+          <option value={3}> level 3 </option>
+        </Section>
+        <Btn onClick={this.handleSubmit}>Add</Btn>
       </Form>
     );
   }
