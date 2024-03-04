@@ -16,7 +16,7 @@ const getColorLevel = ({ level }) => {
 const checkStatus = ({ status }) => (status ? colors.COMPLETE : "transparent");
 
 export const List = styled.ul`
-  margin: 0;
+  margin: 20px 0;
   padding: 25px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

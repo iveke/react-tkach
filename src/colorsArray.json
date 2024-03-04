@@ -1,0 +1,26 @@
+[
+    {
+        "color": "RED",
+        "code": "#f00"
+    },
+    {
+        "color": "ORANGE",
+        "code": "#f0a100"
+    },
+    {
+        "color": "PINK",
+        "code": "#FF00F0"
+    },
+    {
+        "color": "YELLOW",
+        "code": "#FFFF00"
+    },
+    {
+        "color": "GREEN",
+        "code": "#00DD70"
+    },
+    {
+        "color": "BLUE",
+        "code": "#0000af"
+    }
+]
