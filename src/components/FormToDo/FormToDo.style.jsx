@@ -1,11 +1,16 @@
+import { ErrorMessage, Form } from "formik";
 import styled from "styled-components";
 
-export const Form = styled.form`
+export const Forms = styled(Form)`
   position: relative;
   margin: 20px auto;
   padding: 10px;
   width: 80%;
 `;
+
+export const ErrorMess = styled(ErrorMessage)`
+  color: red;
+`
 
 export const Input = styled.input`
   margin-bottom: 10px;
