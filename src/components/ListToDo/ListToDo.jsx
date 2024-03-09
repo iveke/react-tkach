@@ -1,5 +1,4 @@
-import { Component } from "react";
-import data from "../../to-do.json"
+
 import { Item, Level, List, Text, Title } from "./ListToDo.style";
 
 

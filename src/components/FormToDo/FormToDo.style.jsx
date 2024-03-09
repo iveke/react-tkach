@@ -1,4 +1,4 @@
-import { ErrorMessage, Form } from "formik";
+import { ErrorMessage, Form, Field } from "formik";
 import styled from "styled-components";
 
 export const Forms = styled(Form)`
@@ -12,22 +12,26 @@ export const ErrorMess = styled(ErrorMessage)`
   color: red;
 `
 
-export const Input = styled.input`
+export const Input = styled(Field)`
   margin-bottom: 10px;
   width: inherit;
 `;
 
-export const Textrea = styled.textarea`
+export const Textrea = styled(Field)`
   width: inherit;
+  height: 100px;
 `;
 
-export const Section = styled.select`
+export const Section = styled(Field)`
   display: block;
+  margin-top: 10px;
+  width: 70px;
+  height: 30px;
 `;
 
 export const Btn = styled.button`
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
   right: 120px;
   width: 100px;
   height: 30px;

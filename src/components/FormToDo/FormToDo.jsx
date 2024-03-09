@@ -1,5 +1,5 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
-// import { Btn, Form, Input, Section, Textrea } from "./FormToDo.style";
+import { ErrorMessage, Formik } from "formik";
+import { Btn, Input, Section, Textrea } from "./FormToDo.style";
 import { Component } from "react";
 import { Forms } from "./FormToDo.style";
 import * as Yup from "yup";
@@ -21,52 +21,25 @@ class FormLogin extends Component {
     return (
       <Formik
         initialValues={intialValue}
-        onSubmit={(values, {resetForm}) => {
-          console.log(values);
-          resetForm()
+        onSubmit={(values, { resetForm }) => {
+          console.log(values, this.props);
+          this.props.onAdd({ ...values, level: Number(values.level) });
+          resetForm();
         }}
         validationSchema={SignUpSchema}
       >
         <Forms>
-          <Field name="title" type="text" />
-          <ErrorMessage name="title" component="p"/>
-          <Field name="description" type="text" />
-          <Field name="level" as="select">
+          <Input name="title" type="text" />
+          <ErrorMessage name="title" component="p" />
+          <Textrea name="description" type="text" />
+          <Section name="level" as="select">
             <option value="1"> level 1</option>
             <option value="2"> level 2</option>
             <option value="3"> level 3 </option>
-          </Field>
-          <button type="submit">Submit</button>
+          </Section>
+          <Btn type="submit">Submit</Btn>
         </Forms>
       </Formik>
-
-      // <Form>
-      //   <Input
-      //     name="title"
-      //     type="text"
-      //     placeholder="enter title task"
-      //     value={this.state.title}
-      //     onChange={this.handleChange}
-      //   />
-      //   <Textrea
-      //     name="description"
-      //     cols="30"
-      //     rows="4"
-      //     placeholder="enter descriptiton"
-      //     value={this.state.description}
-      //     onChange={this.handleChange}
-      //   ></Textrea>
-      //   <Section
-      //     name="level"
-      //     value={this.state.level}
-      //     onChange={this.handleChange}
-      //   >
-      //     <option value="1"> level 1</option>
-      //     <option value={2}> level 2</option>
-      //     <option value={3}> level 3 </option>
-      //   </Section>
-      //   <Btn onClick={this.handleSubmit}>Add</Btn>
-      // </Form>
     );
   }
 }
