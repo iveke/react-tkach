@@ -19,7 +19,6 @@ export const Input = styled(Field)`
 
 export const Textrea = styled(Field)`
   width: inherit;
-  height: 100px;
 `;
 
 export const Section = styled(Field)`

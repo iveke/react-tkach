@@ -14,12 +14,15 @@ componentWillUnmount(){
 
 handleEsc =(e)=> {
     if(e.code === "Escape"){
-        console.log("hi");
-        this.props.onClose()
+        alert("You really want close a modal window?");
+        alert("Really?");
+        this.props.onClose();
     }
 }
 handleClickBg =(e)=> {
     if(e.target == e.currentTarget){
+        alert("You really want close a modal window?");
+        alert("Really?");
         this.props.onClose();
     }
 

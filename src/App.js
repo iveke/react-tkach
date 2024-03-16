@@ -35,12 +35,24 @@ class App extends Component {
     if (parseDate) {
       this.setState({ list: parseDate });
     }
+    const savedColor = localStorage.getItem("displayColor");
+    const parseSavedColor = JSON.parse(savedColor);
+    if(parseSavedColor){
+      this.setState({currentColor: parseSavedColor});
+    }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate( prevState) {
     if (prevState.list !== this.state.list) {
       localStorage.setItem("todo", JSON.stringify(this.state.list));
     }
+    if(prevState.currentColor !== this.state.currentColor){
+      localStorage.setItem(
+        "displayColor",
+        JSON.stringify(this.state.currentColor)
+      );
+    }
+    
   }
   toggleModal = () => {
     this.setState((prevState) => ({ showModal: !prevState.showModal }));
@@ -71,9 +83,11 @@ class App extends Component {
         <ListToDo list={this.state.list} onDelete={this.handleDeleteItem} />
         <ColorBoxs onChoose={this.handleChoose} />
         <Display reset={this.handleReset} color={this.state.currentColor} />
-        {this.state.showModal && <Modal onClose={this.toggleModal}>
-          <TextContent></TextContent>
-          </Modal>}
+        {this.state.showModal && (
+          <Modal onClose={this.toggleModal}>
+            <TextContent></TextContent>
+          </Modal>
+        )}
       </main>
     );
   }
