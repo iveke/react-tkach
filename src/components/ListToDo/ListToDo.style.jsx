@@ -57,3 +57,11 @@ export const Level = styled.div`
 `;
 
 
+export const DisplayItem = styled.div`
+  display: block;
+  padding: 10px;
+  width: 400px;
+  height: 100px;
+  border: 2px solid #000;
+
+`

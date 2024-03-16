@@ -7,6 +7,7 @@ import { nanoid } from "nanoid";
 import ColorBoxs from "components/ColorBoxs/ColorBoxs";
 import Display from "components/ColorBoxs/Display";
 import Modal from "components/Modal/Modal.jsx";
+import { DisplayItem } from "components/ListToDo/ListToDo.style";
 
 const intialColor = "#fff";
 
@@ -27,6 +28,7 @@ class App extends Component {
     list: data,
     currentColor: intialColor,
     showModal: false,
+    phrase: ""
   };
 
   componentDidMount() {
@@ -68,6 +70,10 @@ class App extends Component {
       list: prevState.list.filter((item) => item.id !== deleteId),
     }));
   };
+  handleClickItem = ()=> {
+    console.log("hi");
+
+  }
   handleAddItem = (item) => {
     this.setState((prevState) => ({
       list: [...prevState.list, { ...item, id: nanoid(), status: false }],
@@ -80,7 +86,8 @@ class App extends Component {
           OpenModal
         </button>
         <FormLogin onAdd={this.handleAddItem} />
-        <ListToDo list={this.state.list} onDelete={this.handleDeleteItem} />
+        <ListToDo onClick={this.handleClickItem} list={this.state.list} onDelete={this.handleDeleteItem} />
+        <DisplayItem></DisplayItem>
         <ColorBoxs onChoose={this.handleChoose} />
         <Display reset={this.handleReset} color={this.state.currentColor} />
         {this.state.showModal && (

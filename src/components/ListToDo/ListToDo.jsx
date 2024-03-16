@@ -2,7 +2,7 @@
 import { Item, Level, List, Text, Title } from "./ListToDo.style";
 
 
-const ListToDo = ({list, onDelete}) => {
+const ListToDo = ({list, onDelete, onClick}) => {
     
     
         return (
@@ -16,6 +16,7 @@ const ListToDo = ({list, onDelete}) => {
                level={level}
                status={status}
                description={description}
+               onClick={onClick}
                onDelete={onDelete}
                />
                ))}
@@ -24,9 +25,9 @@ const ListToDo = ({list, onDelete}) => {
     
 }
 
-const ToDoItem = ({id, title, level, description, onDelete}) => {
+const ToDoItem = ({id, title, level, description, onDelete, onClick}) => {
     return ( 
-        <Item level={level}>
+        <Item onClick={()=> {onClick()}} level={level}>
             <Title>{title}</Title>
             <Text>{description}</Text>
             <Level>{level}</Level>
@@ -36,3 +37,4 @@ const ToDoItem = ({id, title, level, description, onDelete}) => {
 }
 
 export default ListToDo;
+
