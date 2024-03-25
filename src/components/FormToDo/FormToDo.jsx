@@ -1,4 +1,4 @@
-import {  Formik } from "formik";
+import { Formik } from "formik";
 import { Btn, ErrorMess, Input, Section, Textrea } from "./FormToDo.style";
 import { Component } from "react";
 import { Forms } from "./FormToDo.style";
@@ -17,29 +17,26 @@ const SignUpSchema = Yup.object().shape({
 });
 
 class FormLogin extends Component {
-  
   state = {
-    values: ""
+    values: "",
+  };
+  componentDidMount() {
+    const savedValues = localStorage.getItem("formValues");
+    const parseSavedValues = JSON.parse(savedValues);
+    console.log(parseSavedValues);
+    // if(parseSavedValues){
+    //   this.setState({values: parseSavedValues});
+    // }
   }
-componentDidMount(){
-  const savedValues = localStorage.getItem("formValues");
-  const parseSavedValues = JSON.parse(savedValues);
-  console.log(parseSavedValues);
-  // if(parseSavedValues){
-  //   this.setState({values: parseSavedValues});
-  // }
-}
-  componentDidUpdate(prevState){
+  componentDidUpdate(prevState) {
     // if(prevState.values !== this.state.values){
     //   localStorage.setItem("formValues", JSON.stringify(this.state.values));
     // }
-    
   }
   render() {
     return (
       <Formik
         initialValues={intialValue}
-        
         onSubmit={(values, { resetForm }) => {
           console.log(values, this.props);
           this.props.onAdd({ ...values, level: Number(values.level) });

@@ -8,6 +8,10 @@ import ColorBoxs from "components/ColorBoxs/ColorBoxs";
 import Display from "components/ColorBoxs/Display";
 import Modal from "components/Modal/Modal.jsx";
 import { DisplayItem } from "components/ListToDo/ListToDo.style";
+import { createToDo, deleteToDo, fetchToDo } from "service/api";
+import { Loader } from "components/Loader";
+import toast, { Toaster } from 'react-hot-toast';
+
 
 const intialColor = "#fff";
 
@@ -25,36 +29,39 @@ const TextContent = () => {
 
 class App extends Component {
   state = {
-    list: data,
+    list: [],
     currentColor: intialColor,
     showModal: false,
-    phrase: ""
+    isLoading: false,
+    error: null,
   };
 
-  componentDidMount() {
-    const data = localStorage.getItem("todo");
-    const parseDate = JSON.parse(data);
-    if (parseDate) {
-      this.setState({ list: parseDate });
+  async componentDidMount() {
+    try {
+      const res = await fetchToDo();
+      this.setState({ list: res, isLoading: true });
+    } catch (error) {
+      this.setState({ error });
+    } finally {
+      this.setState({ isLoading: false });
     }
-    const savedColor = localStorage.getItem("displayColor");
-    const parseSavedColor = JSON.parse(savedColor);
-    if(parseSavedColor){
-      this.setState({currentColor: parseSavedColor});
-    }
+    // const savedColor = localStorage.getItem("displayColor");
+    // const parseSavedColor = JSON.parse(savedColor);
+    // if(parseSavedColor){
+    //   this.setState({currentColor: parseSavedColor});
+    // }
   }
 
-  componentDidUpdate( prevState) {
+  componentDidUpdate(prevState) {
     if (prevState.list !== this.state.list) {
       localStorage.setItem("todo", JSON.stringify(this.state.list));
     }
-    if(prevState.currentColor !== this.state.currentColor){
+    if (prevState.currentColor !== this.state.currentColor) {
       localStorage.setItem(
         "displayColor",
         JSON.stringify(this.state.currentColor)
       );
     }
-    
   }
   toggleModal = () => {
     this.setState((prevState) => ({ showModal: !prevState.showModal }));
@@ -65,19 +72,36 @@ class App extends Component {
   handleReset = () => {
     this.setState({ currentColor: intialColor });
   };
-  handleDeleteItem = (deleteId) => {
-    this.setState((prevState) => ({
-      list: prevState.list.filter((item) => item.id !== deleteId),
-    }));
+  handleDeleteItem = async (deleteId) => {
+    try {
+      this.setState({ isLoading: true, error: null });
+      const deleteToDoItem = await deleteToDo(deleteId);
+      this.setState((prevState) => ({
+        list: prevState.list.filter((item) => item.id !== deleteToDoItem.id),
+      }));
+      toast.success("ToDo delete success");
+    } catch (error) {
+      this.setState({ error });
+    } finally {
+      this.setState({ isLoading: false });
+    }
   };
-  handleClickItem = ()=> {
-    console.log("hi");
+  handleClickItem = () => {};
+  handleAddItem = async (item) => {
+    try {
+      console.log(this.state.isLoading);
 
-  }
-  handleAddItem = (item) => {
-    this.setState((prevState) => ({
-      list: [...prevState.list, { ...item, id: nanoid(), status: false }],
-    }));
+      this.setState({ isLoading: true, error: null });
+      const addToDo = await createToDo(item);
+      this.setState((prevState) => ({
+        list: [...prevState.list, addToDo],
+      }));
+      toast.success('ToDo added success');
+    } catch (error) {
+      this.setState({ error });
+    } finally {
+      this.setState({ isLoading: false });
+    }
   };
   render() {
     return (
@@ -86,18 +110,29 @@ class App extends Component {
           OpenModal
         </button>
         <FormLogin onAdd={this.handleAddItem} />
-        <ListToDo onClick={this.handleClickItem} list={this.state.list} onDelete={this.handleDeleteItem} />
-        <DisplayItem></DisplayItem>
-        <ColorBoxs onChoose={this.handleChoose} />
-        <Display reset={this.handleReset} color={this.state.currentColor} />
+
+        {this.state.isLoading && <Loader />}
+        {this.state.list.length > 0 && (
+          <ListToDo
+            onClick={this.handleClickItem}
+            list={this.state.list}
+            onDelete={this.handleDeleteItem}
+          />
+        )}
+        {/* <Loader /> */}
+
+        {/* <ColorBoxs onChoose={this.handleChoose} />
+        <Display reset={this.handleReset} color={this.state.currentColor} /> */}
         {this.state.showModal && (
           <Modal onClose={this.toggleModal}>
             <TextContent></TextContent>
           </Modal>
         )}
+        <Toaster />
       </main>
     );
   }
 }
+
 
 export default App;

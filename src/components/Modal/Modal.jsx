@@ -41,5 +41,5 @@ handleClickBg =(e)=> {
     }
   
 };
-
+ 
 export default Modal;
