@@ -2,21 +2,19 @@
 import { Item, Level, List, Text, Title } from "./ListToDo.style";
 
 
-const ListToDo = ({list, onDelete, onClick}) => {
+const ListToDo = ({list, onDelete}) => {
     
     
         return (
         
             <List>
-                {list.map(({title, description, level,id, status}) => (
+                {list.map(({title, description, level,id}) => (
                <ToDoItem 
                key={id}
                id={id}
                title={title}
                level={level}
-               status={status}
                description={description}
-               onClick={onClick}
                onDelete={onDelete}
                />
                ))}
@@ -25,9 +23,9 @@ const ListToDo = ({list, onDelete, onClick}) => {
     
 }
 
-const ToDoItem = ({id, title, level, description, onDelete, onClick}) => {
+const ToDoItem = ({id, title, level, description, onDelete}) => {
     return ( 
-        <Item onClick={()=> {onClick()}} level={level}>
+        <Item level={level}>
             <Title>{title}</Title>
             <Text>{description}</Text>
             <Level>{level}</Level>

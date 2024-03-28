@@ -8,10 +8,10 @@ import ColorBoxs from "components/ColorBoxs/ColorBoxs";
 import Display from "components/ColorBoxs/Display";
 import Modal from "components/Modal/Modal.jsx";
 import { DisplayItem } from "components/ListToDo/ListToDo.style";
-import { createToDo, deleteToDo, fetchToDo } from "service/api";
+import { createToDo, deleteToDo, fetchToDo, filterToDo } from "service/api";
 import { Loader } from "components/Loader";
-import toast, { Toaster } from 'react-hot-toast';
-
+import toast, { Toaster } from "react-hot-toast";
+import FilterForm from "components/Filter/Filter";
 
 const intialColor = "#fff";
 
@@ -86,23 +86,35 @@ class App extends Component {
       this.setState({ isLoading: false });
     }
   };
-  handleClickItem = () => {};
+  // handleClickItem = () => {};
   handleAddItem = async (item) => {
     try {
-      console.log(this.state.isLoading);
-
       this.setState({ isLoading: true, error: null });
       const addToDo = await createToDo(item);
       this.setState((prevState) => ({
         list: [...prevState.list, addToDo],
       }));
-      toast.success('ToDo added success');
+      toast.success("ToDo added success");
     } catch (error) {
       this.setState({ error });
     } finally {
       this.setState({ isLoading: false });
     }
   };
+
+  handleFilter = async ({title, level}) => {
+    console.log(level, title);
+    try {
+      this.setState({ isLoading: true, error: null });
+      const filterList = await filterToDo(title, level);
+      this.setState({ list: filterList });
+    } catch (error) {
+      this.setState({ error });
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  };
+
   render() {
     return (
       <main style={{ padding: 50 }}>
@@ -110,11 +122,11 @@ class App extends Component {
           OpenModal
         </button>
         <FormLogin onAdd={this.handleAddItem} />
+        <FilterForm onFilter={this.handleFilter}/>
 
         {this.state.isLoading && <Loader />}
         {this.state.list.length > 0 && (
           <ListToDo
-            onClick={this.handleClickItem}
             list={this.state.list}
             onDelete={this.handleDeleteItem}
           />
@@ -133,6 +145,5 @@ class App extends Component {
     );
   }
 }
-
 
 export default App;
