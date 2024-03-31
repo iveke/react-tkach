@@ -9,17 +9,12 @@ export const fetchToDo = async () => {
   return res.data;
 };
 
-export const filterToDo = async (title, level) => {
-  
-  // const params = new URLSearchParams();
-  // params.append('title', `${title}`);
-  // params.append('level', `${level}`);
+// export const filterToDo = async () => {
 
-
-  const res = await axios.get(`/?title=${title}`);
-  console.log(res);
-  return res.data;
-}
+//   const res = await axios.get("/");
+//   console.log(res);
+//   return res.data;
+// }
 
 export const createToDo = async (todo) => {
   const res = await axios.post("/", todo);

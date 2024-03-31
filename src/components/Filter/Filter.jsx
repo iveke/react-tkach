@@ -16,15 +16,11 @@ const SignUpSchema = Yup.object().shape({
   });
 
 class FilterForm extends Component {
-  state = {
-    value: "",
-  }
   render(){
     return (
     <Formik
         initialValues={intialValue}
         onSubmit={(values, { resetForm }) => {
-          console.log(values, this.props);
           this.props.onFilter(values);
           resetForm();
         }}

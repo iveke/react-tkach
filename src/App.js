@@ -102,40 +102,29 @@ class App extends Component {
     }
   };
 
-  handleFilter = async ({title, level}) => {
-    console.log(level, title);
-    try {
-      this.setState({ isLoading: true, error: null });
-      const filterList = await filterToDo(title, level);
-      this.setState({ list: filterList });
-    } catch (error) {
-      this.setState({ error });
-    } finally {
-      this.setState({ isLoading: false });
-    }
+  handleFilter = ({ title, level }) => {
+    console.log(title, level);
   };
 
   render() {
+    const {isLoading, list, showModal} = this.state;
     return (
       <main style={{ padding: 50 }}>
         <button type="button" onClick={this.toggleModal}>
           OpenModal
         </button>
         <FormLogin onAdd={this.handleAddItem} />
-        <FilterForm onFilter={this.handleFilter}/>
+        <FilterForm onFilter={this.handleFilter} />
 
-        {this.state.isLoading && <Loader />}
-        {this.state.list.length > 0 && (
-          <ListToDo
-            list={this.state.list}
-            onDelete={this.handleDeleteItem}
-          />
+        {isLoading && <Loader />}
+        {list.length > 0 && (
+          <ListToDo list={list} onDelete={this.handleDeleteItem} />
         )}
         {/* <Loader /> */}
 
         {/* <ColorBoxs onChoose={this.handleChoose} />
         <Display reset={this.handleReset} color={this.state.currentColor} /> */}
-        {this.state.showModal && (
+        {showModal && (
           <Modal onClose={this.toggleModal}>
             <TextContent></TextContent>
           </Modal>
