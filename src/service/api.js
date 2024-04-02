@@ -4,7 +4,7 @@ axios.defaults.baseURL = "https://65f01842da8c6584131ac041.mockapi.io/todoList";
 
 
 export const fetchToDo = async () => {
-  console.log(axios.defaults.baseURL);
+  // console.log(axios.defaults.baseURL);
   const res = await axios.get("/");
   return res.data;
 };

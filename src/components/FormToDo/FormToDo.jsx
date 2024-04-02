@@ -21,9 +21,9 @@ class FormLogin extends Component {
     values: "",
   };
   componentDidMount() {
-    const savedValues = localStorage.getItem("formValues");
-    const parseSavedValues = JSON.parse(savedValues);
-    console.log(parseSavedValues);
+    // const savedValues = localStorage.getItem("formValues");
+    // const parseSavedValues = JSON.parse(savedValues);
+    // console.log(parseSavedValues);
     // if(parseSavedValues){
     //   this.setState({values: parseSavedValues});
     // }
