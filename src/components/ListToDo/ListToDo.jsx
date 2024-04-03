@@ -3,12 +3,10 @@ import { Item, Level, List, Text, Title } from "./ListToDo.style";
 
 
 const ListToDo = ({list, onDelete}) => {
-    
-    
         return (
         
             <List>
-                {list.map(({title, description, level,id}) => (
+                {list.map(({title, description, level, id}) => (
                <ToDoItem 
                key={id}
                id={id}

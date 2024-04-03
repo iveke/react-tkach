@@ -13,6 +13,7 @@ import { Loader } from "components/Loader";
 import toast, { Toaster } from "react-hot-toast";
 import FilterForm from "components/Filter/Filter";
 import { useState } from "react";
+import { FormTest } from "components/FormToDo/FormTest";
 
 const intialColor = "#fff";
 
@@ -30,78 +31,87 @@ const TextContent = () => {
 
 function App() {
   const [list, setList] = useState([]);
+  const [filters, setFilters] = useState({ topic: "", level: "all" });
   const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    async function fetchToDo(){
-
+    async function asyncWrapFn() {
       try {
         const res = await fetchToDo();
-        setList({ list: res });
-        setIsLoading({ isLoading: true });
+        setList([res]);
+        setIsLoading(true);
       } catch (error) {
-        setError({ error });
+        setError(error);
       } finally {
-        setIsLoading({ isLoading: false });
+        setIsLoading(false);
       }
     }
-    fetchToDo();
-  }, []);
-  // useEffect((prevState)=> {
-  //   if (prevState.list !== list) {
-  //     localStorage.setItem("todo", JSON.stringify(list));
-  //   }
-  // }, [list]);
 
-  // const toggleModal = () => {
-  //   setShowModal((prevShowModal) => {
-  //     showModal: !(prevShowModal);
-  //   });
-  // };
+    asyncWrapFn();
+  }, []);
+  useEffect(
+    (prevState) => {
+      if (prevState !== list) {
+        localStorage.setItem("todo", JSON.stringify(list));
+      }
+    },
+    [list]
+  );
+
+  const toggleModal = () => {
+    setShowModal((prevShowModal) => {
+      return !prevShowModal;
+    });
+  };
   const handleDeleteItem = async (deleteId) => {
     try {
-      setIsLoading({ isLoading: true });
-      setError({ error: null });
+      setIsLoading(true);
+      setError(null);
 
       const deleteToDoItem = await deleteToDo(deleteId);
-      // setList((prevState) => {
-      //   list: prevState.filter((item) => item.id !== deleteToDoItem.id);
-      // });
+      setList((prevState) => {
+        return prevState.filter((item) => item.id !== deleteToDoItem.id);
+      });
 
       toast.success("ToDo delete success");
     } catch (error) {
-      setError({ error });
+      setError(error);
     } finally {
-      setIsLoading({ isLoading: false });
+      setIsLoading(false);
     }
   };
   const handleAddItem = async (item) => {
     try {
-      setIsLoading({ isLoading: true });
-      setError({ error: null });
+      setIsLoading(true);
+      setError(null);
       const addToDo = await createToDo(item);
-      // setList((prevState) => {
-      //   list: [...prevState, addToDo];
-      // });
+      setList((prevState) => {
+        return [...prevState, addToDo];
+      });
 
       toast.success("ToDo added success");
     } catch (error) {
-      setError({ error });
+      setError(error);
     } finally {
-      setIsLoading({ isLoading: false });
+      setIsLoading(false);
     }
   };
   const handleFilter = ({ title, level }) => {
     console.log(title, level);
   };
 
+  const changeFIlter = (value, key) => {
+    setFilters({ ...filters, value: key });
+  };
+
   return (
     <main style={{ padding: 50 }}>
-      <button type="button" >
+      <button type="button" onClick={toggleModal}>
         OpenModal
       </button>
+      <FormTest />
       <FormLogin onAdd={handleAddItem} />
       <FilterForm onFilter={handleFilter} />
 
@@ -112,7 +122,7 @@ function App() {
       {/* <ColorBoxs onChoose={this.handleChoose} />
 <Display reset={this.handleReset} color={this.state.currentColor} /> */}
       {showModal && (
-        <Modal >
+        <Modal>
           <TextContent></TextContent>
         </Modal>
       )}
