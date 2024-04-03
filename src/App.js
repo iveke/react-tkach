@@ -34,16 +34,20 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect( async () => {
-    try {
-      const res = await fetchToDo();
-      setList({ list: res });
-      setIsLoading({ isLoading: true });
-    } catch (error) {
-      setError({ error });
-    } finally {
-      setIsLoading({ isLoading: false });
+  useEffect(() => {
+    async function fetchToDo(){
+
+      try {
+        const res = await fetchToDo();
+        setList({ list: res });
+        setIsLoading({ isLoading: true });
+      } catch (error) {
+        setError({ error });
+      } finally {
+        setIsLoading({ isLoading: false });
+      }
     }
+    fetchToDo();
   }, []);
   // useEffect((prevState)=> {
   //   if (prevState.list !== list) {
