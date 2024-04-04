@@ -40,7 +40,7 @@ function App() {
     async function asyncWrapFn() {
       try {
         const res = await fetchToDo();
-        setList([res]);
+        setList(res);
         setIsLoading(true);
       } catch (error) {
         setError(error);
@@ -98,13 +98,24 @@ function App() {
       setIsLoading(false);
     }
   };
-  const handleFilter = ({ title, level }) => {
-    console.log(title, level);
+  const handleFilter = ( filters, list ) => {
+    if(filters.level === "all"){
+      return list.filters((item) => 
+        item.title.toLowerCase().includes(filters.title.toLowerCase())
+      );
+    }
+    return list.filter(
+      (item) =>
+        item.title.toLowerCase().includes(filters.title.toLowerCase()) &&
+        item.level === filters.level 
+    );
   };
 
-  const changeFIlter = (value, key) => {
-    setFilters({ ...filters, value: key });
+  const changeFilter = (value, key) => {
+    setFilters({ ...filters, [value]: key });
   };
+
+  
 
   return (
     <main style={{ padding: 50 }}>
@@ -113,7 +124,7 @@ function App() {
       </button>
       <FormTest />
       <FormLogin onAdd={handleAddItem} />
-      <FilterForm onFilter={handleFilter} />
+      <FilterForm onFilter={changeFilter} />
 
       {isLoading && <Loader />}
       {list.length > 0 && <ListToDo list={list} onDelete={handleDeleteItem} />}

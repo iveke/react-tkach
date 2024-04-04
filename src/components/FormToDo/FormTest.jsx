@@ -1,19 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useLocalStorage } from "hooks/useLocalStorage";
 
-export const useLocalStorage = (key, defaultValues) => {
-  const [state, useState] = useState(defaultValues);
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(state));
-  }, [state, key]);
-  return [state, key];
-};
 
 export const FormTest = () => {
-  useLocalStorage(
+  const [userName, setUserName] = useLocalStorage(
     "userName",
     () => JSON.parse(localStorage.getItem("userName")) ?? ""
   );
-  useLocalStorage(
+  const [userLastName, setUserLastName]=useLocalStorage(
     "userLastName",
     () => JSON.parse(localStorage.getItem("userName")) ?? ""
   );
@@ -30,7 +24,7 @@ export const FormTest = () => {
     setUserName(e.target.value);
   };
   const handelLastName = (e) => {
-    setUseLastName(e.target.value);
+    setUserLastName(e.target.value);
   };
   return (
     <form>

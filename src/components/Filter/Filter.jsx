@@ -16,21 +16,27 @@ const SignUpSchema = Yup.object().shape({
   });
 
 class FilterForm extends Component {
+
+  hadlerFilterOnChange =(e)=>{
+const {name, value} = e.target;
+this.props.onFilter(name, value);
+  }
   render(){
     return (
     <Formik
         initialValues={intialValue}
-        onSubmit={(values, { resetForm }) => {
-          this.props.onFilter(values);
-          resetForm();
-        }}
+        // onSubmit={(values, { resetForm }) => {
+        //   this.props.onFilter(values);
+        //   resetForm();
+        // }}
         validationSchema={SignUpSchema}
       >
         <Forms>
             <h2>Filter</h2>
-          <Input name="title" type="text" />
+          <Input onChange={this.hadlerFilterOnChange} name="title" type="text" />
           <ErrorMess name="title" component="p" />
-          <Section name="level" as="select">
+          <Section onChange={this.hadlerFilterOnChange} name="level" as="select">
+            <option value="all">all</option>
             <option value="1"> level 1</option>
             <option value="2"> level 2</option>
             <option value="3"> level 3 </option>
