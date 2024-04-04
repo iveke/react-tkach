@@ -9,13 +9,6 @@ export const fetchToDo = async () => {
   return res.data;
 };
 
-// export const filterToDo = async () => {
-
-//   const res = await axios.get("/");
-//   console.log(res);
-//   return res.data;
-// }
-
 export const createToDo = async (todo) => {
   const res = await axios.post("/", todo);
   return res.data;
