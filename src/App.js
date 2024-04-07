@@ -3,7 +3,7 @@ import FormLogin from "components/FormToDo/FormToDo.jsx";
 import ListToDo from "components/ListToDo/ListToDo.jsx";
 import { useEffect } from "react";
 import Modal from "components/Modal/Modal.jsx";
-import { createToDo, deleteToDo, fetchToDo} from "service/api";
+import { createToDo, deleteToDo, fetchToDo } from "service/api";
 import { Loader } from "components/Loader";
 import toast, { Toaster } from "react-hot-toast";
 import FilterForm from "components/Filter/Filter";
@@ -111,6 +111,8 @@ function App() {
     setFilters({ ...filters, [value]: key });
   };
 
+
+
   return (
     <main style={{ padding: 50 }}>
       <button type="button" onClick={toggleModal}>
@@ -136,6 +138,8 @@ function App() {
         </Modal>
       )}
       <Toaster />
+
+      
     </main>
   );
 }
