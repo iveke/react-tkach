@@ -1,9 +1,9 @@
 import "../node_modules/modern-normalize/modern-normalize.css";
-import styled from "styled-components";
+import {createGlobalStyle} from "styled-components";
 
-export const GlobalStyle = styled.createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
 
-* Box sizing rules */ *,
+ *,
 *::before,
 *::after {
   box-sizing: border-box;
@@ -113,3 +113,5 @@ html {
     background: #6191ff;
   }
 }`;
+
+export default GlobalStyle;
