@@ -14,13 +14,13 @@ import styled from "styled-components";
 // }
 // }
 
-export const CardsWrap = styled.div`
+export const CardsWrap = styled.ul`
 display:flex;
 flex-direction: column;
 gap:30px;
 `
 
-export const CardStyle = styled.div`
+export const CardStyle = styled.li`
 width: 600px;
 height: 90px;
 padding: 30px 0;
@@ -28,7 +28,7 @@ font-size: 24px;
 background-color: brown;
 user-select: none;`
 
-export const HiddenText = styled.div`
+export const HiddenText = styled.p`
 
 background-color: brown;
 `;

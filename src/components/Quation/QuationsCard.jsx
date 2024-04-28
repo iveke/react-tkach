@@ -1,69 +1,53 @@
 import { HiddenText } from "./QuationsCard.style";
 import { CardStyle } from "components/Quation/QuationsCard.style";
-import { useEffect, useState, useRef } from "react";
+import { useState } from "react";
 import { CardsWrap } from "./QuationsCard.style";
-
-// let prevActive = null;
-// const initial = {
-//   item: "name",
-//   open: () => {},
-//   close: () => {},
-// };
+import data from "../../data";
 
 export function Cards() {
+  const [mult, setMult] = useState([]);
+  const [enableMult, setEnableMult] = useState(false);
   const [active, setActive] = useState(null);
-  //   const [prevActive, setPrevActive] = useState(null);
-  //   useEffect(
-  //     () => {
-  //         console.log(prevActive, active)
-  //       if(active != prevActive){
-  //         console.log(prevActive)
-  //       }
-  //     },
-  //     [active]
-  //   );
+  const [cards, setCards] = useState(data ?? []);
 
-  const handleAction = async (e, open, setOpen) => {
-    // if(active != e.currentTarget)
-    const activeItem = e.currentTarget;
+  const handleMult = () => {
+    setEnableMult((state) => !state)
+  }
 
-    if (open) {
-      setActive(null);
-      setOpen(false);
-    } else {
-      setActive(activeItem);
-      setOpen(true);
-    }
+  const handleSingleClick = (currentId) => {
+    setActive(active === currentId ? null : currentId);
   };
 
+  const handleMultClick = (currentId) => {
+    const isActive = mult.includes(currentId);
+    if(!isActive) {
+        setMult((state) => [...state, currentId] )
+        return;
+    }
+    const filterMult = mult.filter((item)=> item !== currentId)
+    setMult(filterMult);
+  }
+
   return (
-    <CardsWrap>
-      <Card onAction={handleAction} active={active}>
-        What are according components?
-      </Card>
-      <Card onAction={handleAction} active={active}>
-        What are they used for?
-      </Card>
-      <Card onAction={handleAction} active={active}>
-        According as a musical instruments
-      </Card>
-      <Card onAction={handleAction} active={active}>
-        Can I create an according components with a different framework
-      </Card>
-    </CardsWrap>
+    <>
+      <button type="button" onClick={handleMult}>mult</button>
+      <ul>
+        {cards?.length > 0 &&
+          cards.map((card) => (
+            <Card card={card} active={active} onSingleClick={handleSingleClick} onMultClick={handleMultClick} enableMult={enableMult} mult={mult}/>
+          ))}
+      </ul>
+    </>
   );
 }
 
-const Card = ({ children, onAction }) => {
-  const [open, setOpen] = useState(false);
+const Card = ({ card, onSingleClick, active, enableMult, mult, onMultClick }) => {
+const handleClick = () => enableMult ? onMultClick(card.id) : onSingleClick(card.id)
   return (
-    <CardStyle onClick={(e) => onAction(e, open, setOpen)}>
-      <p>
-        {children} <span>{open ? "-" : "+"}</span>
-        {open && (
-          <HiddenText>Because this good for anyone or somebody</HiddenText>
-        )}
-      </p>
-    </CardStyle>
+    <li key={card.id} onClick={handleClick}>
+      <h2>{card.question}</h2>
+      {enableMult ? mult.includes(card.id) && <HiddenText>{card.answer}</HiddenText> : card.id === active && <HiddenText>{card.answer}</HiddenText>}
+      
+    </li>
   );
 };
