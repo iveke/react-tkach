@@ -76,10 +76,9 @@ import { deleteToDo, fetchToDo } from "service/api";
         level={filters.level}
       />
      {list.length > 0 && (
-        <ListToDo list={handleFilter()}/>
+        <ListToDo list={handleFilter()} onDelete={handleDeleteItem} />
       )}</>
 }
 
 export default Todo;
 
-// onDelete={handleDeleteItem} 

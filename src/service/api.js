@@ -3,6 +3,11 @@ import axios from "axios";
 axios.defaults.baseURL = "https://65f01842da8c6584131ac041.mockapi.io/todoList";
 
 
+export const fetchToDoId = async (todoId) => {
+  const res = await axios.get(`/${todoId}`);
+  return res.data;
+}
+
 export const fetchToDo = async () => {
   // console.log(axios.defaults.baseURL);
   const res = await axios.get("/");

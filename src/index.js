@@ -15,11 +15,6 @@ root.render(
     <BrowserRouter basename="mysite">
       <GlobalStyle />
       <App />
-      {/* <Theme /> */}
     </BrowserRouter>
-
-    {/* <Quation /> */}
-    {/* <CompRef />
-    <App /> */}
   </>
 );

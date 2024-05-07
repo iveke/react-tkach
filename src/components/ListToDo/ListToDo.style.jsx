@@ -1,4 +1,5 @@
 import { colors } from "constans.js";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const getColorLevel = ({ level }) => {
@@ -30,7 +31,7 @@ export const Item = styled.li`
   border: 2px solid ${getColorLevel};
 `;
 
-export const Title = styled.p`
+export const Title = styled(Link)`
   font-size: 10px;
   font-style: italic;
   font-weight: 700;

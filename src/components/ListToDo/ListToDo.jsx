@@ -20,7 +20,7 @@ const ListToDo = ({ list, onDelete }) => {
 const ToDoItem = ({ id, title, level, description, onDelete }) => {
   return (
     <Item level={level}>
-      <Title>{title}</Title>
+      <Title to={id} >{title}</Title>
       <Text>{description}</Text>
       <Level>{level}</Level>
       <button
