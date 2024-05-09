@@ -1,15 +1,27 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchToDoId } from "service/api";
 
-async function TodoDetails() {
+ function TodoDetails() {
   const { id } = useParams();
-  const res = await fetchToDoId(id);
-  console.log(res);
+  
+const [data, setData] = useState({});
+
+  useEffect(() => { 
+    const fetchData = async () => { 
+        const res = await fetchToDoId(id); 
+        setData({ ...res }); 
+    }; 
+
+    fetchData(); 
+}, [id]);
+
+  console.log(data);
   return (
     <div>
-      <h2>{res.title}</h2>
-      <p>{res.description}</p>
-      <p>{res.level}</p>
+      <h2>{data.title}</h2>
+      <p>{data.description}</p>
+      <p>{data.level}</p>
     </div>
   );
 }
