@@ -6,7 +6,10 @@ import CreateTodo from "pages/PageCreateToDo";
 import Todo from "pages/PageTodo";
 import TodoDetails from "pages/PageTodoDetails";
 import Layout from "components/Layout/Layout";
-import Home from "pages/Home";
+// import Home from "pages/Home";
+import { lazy } from "react";
+
+const Home = lazy(()=> import('./pages/Home'));
 
 
 function App() {
@@ -18,7 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />}/>
-          <Route path="/createTodo" element={<CreateTodo />} />
+          <Route path="createTodo" element={<CreateTodo />} />
           <Route path="todo" element={<Todo />} />
           <Route path="todo/:id" element={<TodoDetails />} />
           <Route path="*" element={<div>404</div>} />

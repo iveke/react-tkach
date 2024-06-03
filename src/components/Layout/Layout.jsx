@@ -1,12 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
-import styled from "styled-components";
+import { Menu, PagesLink, StyleLink } from "./Layout.style";
 
-const StyleLink = styled(NavLink)`
-color: #000;
-&.active{
-    color:#0ff;
-}
-`
+
 
 
 function Layout() {
@@ -14,15 +9,18 @@ function Layout() {
 
     return (
       <>
-      <ul>
-        <li>
+      <Menu>
+      <PagesLink>
+          <StyleLink to="/">Home</StyleLink>
+        </PagesLink>
+        <PagesLink>
           <StyleLink to="/createTodo">createToDo</StyleLink>
-        </li>
-        <li>
+        </PagesLink>
+        <PagesLink>
           <StyleLink to="/todo">todo</StyleLink>
-        </li>
+        </PagesLink>
       
-      </ul>
+      </Menu>
       <Outlet />
       </>
         
