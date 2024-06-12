@@ -1,6 +1,9 @@
 import { Item, Level, List, Text, Title } from "./ListToDo.style";
 
 const ListToDo = ({ list, onDelete, location }) => {
+
+
+
   return (
     <List>
       {list.map(({ title, description, level, id }) => (

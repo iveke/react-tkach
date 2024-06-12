@@ -21,7 +21,7 @@ export const Textrea = styled(Field)`
   width: inherit;
 `;
 
-export const Section = styled(Field)`
+export const Section = styled.select`
   display: block;
   margin-top: 10px;
   width: 70px;

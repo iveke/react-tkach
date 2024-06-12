@@ -1,17 +1,22 @@
 import FilterForm from "components/Filter/Filter";
 import ListToDo from "components/ListToDo/ListToDo";
+import { useFilterParams } from "hooks/useFilterParams";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { getLevel, getList, getTitle } from "../redux/selectors";
 import { deleteToDo, fetchToDo } from "service/api";
 
 function Todo() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [list, setList] = useState([]);
-  const [searchParams, setSeacrhParams] = useSearchParams();
-  const [title, setTitle] = useState(searchParams.get("title") ?? "");
-  const [level, setLevel] = useState(searchParams.get("level") ?? "all");
+  // const [list, setList] = useSelector(getList);
+  const [list, setList] = useState([]); 
+  // const [{title, level}] =  useFilterParams();
+  const title = useSelector(getTitle);
+  const level = useSelector(getLevel)
+  
 
   // const [filters, setFilters] = seState({ title: "", level: "all" });
 
@@ -71,22 +76,11 @@ function Todo() {
         item.level === level
     );
   };
-  const changeFilterLevel = (key, value) => {
-    setSeacrhParams(key, value);
-  };
-  const changeFilterTitle = (key, value) => {
-    console.log(key, value);
-    setSeacrhParams(key, value);
-  };
+
 
   return (
     <>
-      <FilterForm
-        onFilterLevel={changeFilterLevel}
-        onFilterTitle={setSeacrhParams}
-        title={title}
-        level={level}
-      />
+      <FilterForm />
       {list.length > 0 && (
         <ListToDo
           list={handleFilter()}
