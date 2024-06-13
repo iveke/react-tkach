@@ -1,10 +1,16 @@
 import { devToolsEnhancer } from "@redux-devtools/extension";
-import { createStore } from "redux";
+import { combineReducers, createStore } from "redux";
+import { accountReducer } from "./slice/AccountSlice";
+import { themeReducer } from "./slice/ThemeSlice";
+import { todoReducer } from "./slice/TodoSlice";
 
 const initialStore = {
-  account: {
-    balance: 10,
-  },
+  // account: {
+  //   balance: 10,
+  // },
+  // theme: {
+  //   color: "white",
+  // },
   todos: {
     list: [],
   },
@@ -14,56 +20,30 @@ const initialStore = {
   },
 };
 
-const rootReducer = (state = initialStore, action) => {
-  console.log(action);
-  console.log(state);
-  switch (action.type) {
-    case "form/title":
-      return { ...state, form: { ...state.form, title: action.payload } };
-    case "form/level":
-      return { ...state, form: { ...state.form, level: action.payload } };
-      case "account/deposit":
-        return {
-          ...state,
-          account: {
-            ...state.account,
-            balance: state.account.balance + action.payload,
-          },
-        };
-      case "account/withdraw":
-        return {
-          ...state,
-          account: {
-            ...state.account,
-            balance: state.account.balance - action.payload,
-          },
-        };
-    default:
-      break;
-  }
-return state;
-
-  //   switch (action.type) {
-  //     case "account/deposit":
-  //       return {
-  //         ...state,
-  //         account: {
-  //           ...state.account,
-  //           balance: state.account.balance + action.payload,
-  //         },
-  //       };
-  //     case "account/withdraw":
-  //       return {
-  //         ...state,
-  //         account: {
-  //           ...state.account,
-  //           balance: state.account.balance - action.payload,
-  //         },
-  //       };
-  //       default:
-  //         return state;
-  //   }
-//   return state;
-};
+const rootReducer = combineReducers({
+  account: accountReducer,
+  theme: themeReducer,
+  todos: todoReducer,
+})
 const enhancer = devToolsEnhancer();
 export const store = createStore(rootReducer, enhancer);
+
+
+    // case "todos/upload":
+    //   return {
+    //     ...state,
+    //     todos: { ...state, list: action.payload },
+    //   };
+    // case "todos/delete":
+    //   return {
+    //     ...state,
+    //     todos: {
+    //       ...state,
+    //       list: state.todos.list.filter((item) => item.id !== action.payload),
+    //     },
+    //   };
+
+     //   case "form/title":
+    //     return { ...state, form: { ...state.form, title: action.payload } };
+    //   case "form/level":
+    //     return { ...state, form: { ...state.form, level: action.payload } };

@@ -3,22 +3,23 @@ import ListToDo from "components/ListToDo/ListToDo";
 import { useFilterParams } from "hooks/useFilterParams";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { getLevel, getList, getTitle } from "../redux/selectors";
 import { deleteToDo, fetchToDo } from "service/api";
+import { changeList, deleteItemList } from "../redux/slice/TodoSlice";
 
 function Todo() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  // const [list, setList] = useSelector(getList);
-  const [list, setList] = useState([]); 
-  // const [{title, level}] =  useFilterParams();
-  const title = useSelector(getTitle);
-  const level = useSelector(getLevel)
-  
+  const list = useSelector(getList);
+  console.log(list)
+  // const [list, setList] = useState([]); 
+  const [{title, level}] =  useFilterParams();
+  const dispatch = useDispatch();
+  // const title = useSelector(getTitle);
+  // const level = useSelector(getLevel)
 
-  // const [filters, setFilters] = seState({ title: "", level: "all" });
 
   const location = useLocation();
 
@@ -26,7 +27,8 @@ function Todo() {
     async function asyncWrapFn() {
       try {
         const res = await fetchToDo();
-        setList(res);
+        dispatch(changeList(res));
+        // setList(res);
         setIsLoading(true);
       } catch (error) {
         setError(error);
@@ -44,9 +46,10 @@ function Todo() {
       setError(null);
 
       const deleteToDoItem = await deleteToDo(deleteId);
-      setList((prevState) => {
-        return prevState.filter((item) => item.id !== deleteToDoItem.id);
-      });
+      dispatch(deleteItemList(deleteToDoItem.id))
+      // setList((prevState) => {
+      //   return prevState.filter((item) => item.id !== deleteToDoItem.id);
+      // });
 
       toast.success("ToDo delete success");
     } catch (error) {

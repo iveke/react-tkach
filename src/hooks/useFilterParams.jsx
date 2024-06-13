@@ -11,6 +11,6 @@ export const useFilterParams = () => {
   const setTitleParams = (value) => {
     setSeacrhParams({level, title: value});
   };
-  console.log(setTitleParams, setLevelParams)
+
   return [{title, level}, {setLevelParams, setTitleParams}]
 };

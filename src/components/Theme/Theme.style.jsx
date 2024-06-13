@@ -5,7 +5,7 @@ import styled from "styled-components";
 const getColorsTheme = (colorName, stage) => {
 let color = colorName;
 if(stage){
-    color = colorName === "light" ? "dark" : "light"
+    color = colorName === "white" ? "dark" : "white"
 }
 return theme[color] ?? theme.dark
 }
@@ -14,7 +14,7 @@ export const Page = styled.body`
     width: 100vw;
     height: 100vh;
     padding: 100px;
-    background-color: ${(props) => getColorsTheme(props.theme)};
+    background-color: ${(props) => props.theme}
 `;
 
 export const BtnTheme = styled.button`
