@@ -8,21 +8,15 @@ function FilterForm() {
 
   const dispatch = useDispatch()
   const [{title,level},{setLevelParams, setTitleParams}] =  useFilterParams();
-  // console.log(setLevelParams, setTitleParams);
 
-// const title = useSelector(getTitle);
-// const level = useSelector(getLevel);
   const filterLevelOnChange = (e) => {
     const { value } = e.target;
-    // dispatch(levelOnChange(value))
     setLevelParams(value);
   };
   const filterTitleOnChange = (e) => {
     const { value } = e.target;
-    // dispatch(titleOnChange(value))
     setTitleParams(value);
   };
-console.log(title, level)
   return (
     <>
       <h2>Filter</h2>

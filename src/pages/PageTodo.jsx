@@ -13,15 +13,10 @@ function Todo() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const list = useSelector(getList);
-  console.log(list)
-  // const [list, setList] = useState([]); 
   const [{title, level}] =  useFilterParams();
   const dispatch = useDispatch();
-  // const title = useSelector(getTitle);
-  // const level = useSelector(getLevel)
-
-
   const location = useLocation();
+
 
   useEffect(() => {
     async function asyncWrapFn() {
@@ -47,10 +42,6 @@ function Todo() {
 
       const deleteToDoItem = await deleteToDo(deleteId);
       dispatch(deleteItemList(deleteToDoItem.id))
-      // setList((prevState) => {
-      //   return prevState.filter((item) => item.id !== deleteToDoItem.id);
-      // });
-
       toast.success("ToDo delete success");
     } catch (error) {
       setError(error);

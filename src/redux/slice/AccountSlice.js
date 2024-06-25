@@ -1,36 +1,29 @@
-export const accountReducer = (
-  state = {
-    balance: 10,
+import { createAction, createReducer, createSlice } from "@reduxjs/toolkit";
+
+// export const deposit = createAction("account/deposit");
+// export const withdraw = createAction("account/withdraw");
+
+// export const accountReducer = createReducer({ balance: 10 }, (builder) => {
+//   builder
+//     .addCase(deposit, (state, action) => ({
+//       balance: state.balance + action.payload,
+//     }))
+//     .addCase(withdraw, (state, action) => ({
+//       balance: state.balance - action.payload,
+//     }));
+// });
+const AccountSlice = createSlice({
+  name: "account",
+  initialState: { balance: 10 },
+  reducers: {
+    deposit(state, action) {
+      state.balance += action.payload;
+    },
+    withdraw(state, action) {
+      state.balance -= action.payload;
+    },
   },
-  action
-) => {
-  switch (action.type) {
-    case "account/deposit":
-      return {
-        ...state,
-        balance: state.balance + action.payload,
-      };
-    case "account/withdraw":
-      return {
-        ...state,
-        balance: state.balance - action.payload,
-      };
-    default:
-      break;
-  }
-  return state;
-};
+});
 
-export const deposit = (value) => {
-  return {
-    type: "account/deposit",
-    payload: value,
-  };
-};
-
-export const withdraw = (value) => {
-  return {
-    type: "account/withdraw",
-    payload: value,
-  };
-};
+export const { deposit, withdraw } = AccountSlice.actions;
+export const accountReducer = AccountSlice.reducer;
