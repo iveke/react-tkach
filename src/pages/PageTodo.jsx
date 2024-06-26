@@ -5,14 +5,14 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
-import { getLevel, getList, getTitle } from "../redux/selectors";
+import { selectorsLevel, selectorsList, selectorsTitle } from "../redux/selectors";
 import { deleteToDo, fetchToDo } from "service/api";
 import { changeList, deleteItemList } from "../redux/slice/TodoSlice";
 
 function Todo() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const list = useSelector(getList);
+  const list = useSelector(selectorsList);
   const [{title, level}] =  useFilterParams();
   const dispatch = useDispatch();
   const location = useLocation();

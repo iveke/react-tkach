@@ -1,7 +1,7 @@
 import { useFilterParams } from "hooks/useFilterParams";
 import { useDispatch, useSelector } from "react-redux";
 import { levelOnChange, titleOnChange } from "../../redux/actions";
-import { getLevel, getTitle } from "../../redux/selectors";
+import { selectorsLevel, selectorsTitle } from "../../redux/selectors";
 
 
 function FilterForm() {

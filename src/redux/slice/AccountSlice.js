@@ -16,8 +16,13 @@ const AccountSlice = createSlice({
   name: "account",
   initialState: { balance: 10 },
   reducers: {
-    deposit(state, action) {
-      state.balance += action.payload;
+    deposit: {
+      reducer(state, action) {
+        state.balance += action.payload;
+      },
+      prepare(value) {
+        return { payload: { value }, send: {} };
+      },
     },
     withdraw(state, action) {
       state.balance -= action.payload;

@@ -19,12 +19,42 @@ const initialStore = {
   },
 };
 
+const myMiddleware = (store) => {
+  return function (next) {
+    return function (action) {
+      console.log(action.meta)
+      console.log("myMiddleWare", action);
+      next(action)
+    };
+  };
+};
+
+const myMiddleware2 = (store) => {
+  return function (next) {
+    return function (action) {
+     
+      console.log("myMiddleWare", action);
+      next(action)
+    };
+  };
+};
+
+const myMiddleWare1 =(store)=>(next)=>(action)=>{
+  console.log("myMiddleware2", action);
+  next(action)
+}
+
 // export const store = createStore(rootReducer, enhancer);
 export const store = configureStore({
   reducer: {
     account: accountReducer,
     theme: themeReducer,
     todos: todoReducer,
+  },
+  middleware: (getDefaultMiddleWare) => {
+    const middleware = getDefaultMiddleWare();
+    console.log(middleware);
+    return[...middleware, myMiddleware, myMiddleWare1,myMiddleware2];
   },
 });
 
