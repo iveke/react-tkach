@@ -54,7 +54,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleWare) => {
     const middleware = getDefaultMiddleWare();
     console.log(middleware);
-    return[...middleware, myMiddleware, myMiddleWare1,myMiddleware2];
+    return[...middleware, myMiddleware];
   },
 });
 
