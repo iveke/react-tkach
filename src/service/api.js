@@ -14,15 +14,26 @@ export const fetchToDo = async () => {
   return res.data;
 };
 
-export const createToDo = async (todo) => {
-  const res = await axios.post("/", todo);
-  return res.data;
-};
+// export const createToDos = async (todo) => {
+//   const res = await axios.post("/", todo);
+//   return res.data;
+// };
 
 // export const deleteToDo = async (todoId) => {
 //   const res = await axios.delete(`/${todoId}`);
 //   return res.data;
 // };
+
+export const createToDo = createAsyncThunk(
+  "todo/addToDoItem", async (arg, thunkAPI) => {
+    try {
+      const res = await axios.post("/", arg);
+      return res.data
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error)
+    }
+  }
+)
 
 export const fetchToDos = createAsyncThunk(
   "todo/fetchAll",
@@ -36,10 +47,22 @@ export const fetchToDos = createAsyncThunk(
   }
 );
 
+export const putToDo = createAsyncThunk(
+  "todo/changeToDoItem",
+  async (arg, thunkAPI) => {
+    try {
+      const res = await axios.put(`/${arg.id}`, arg);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const deleteToDo = createAsyncThunk(
   "todo/deleteToDoItem",
   async (arg, thunkAPI) => {
-    console.log(arg);
+
     try {
       const res = await axios.delete(`/${arg}`);
       return res.data;

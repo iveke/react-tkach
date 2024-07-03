@@ -10,18 +10,21 @@ import {
   selectorsLevel,
   selectorsList,
   selectorsLoading,
+  selectorsModal,
   selectorsTitle,
 } from "../redux/selectors";
 import { deleteToDo, fetchToDo, fetchToDos } from "service/api";
 import { changeList, deleteItemList } from "../redux/slice/TodoSlice";
+import { ModalWindows } from "components/Modal/Modal";
 
 function Todo() {
-const isLoading = useSelector(selectorsLoading);
-const error =useSelector(selectorsError);
+  const isLoading = useSelector(selectorsLoading);
+  const error = useSelector(selectorsError);
   const list = useSelector(selectorsList);
   const [{ title, level }] = useFilterParams();
   const dispatch = useDispatch();
   const location = useLocation();
+  const showModal = useSelector(selectorsModal);
 
   useEffect(() => {
     // async function asyncWrapFn() {
@@ -38,10 +41,10 @@ const error =useSelector(selectorsError);
     // }
     dispatch(fetchToDos());
     // asyncWrapFn();
-  }, [dispatch]);
+  }, []);
 
   const handleDeleteItem = async (deleteId) => {
-    dispatch(deleteToDo(deleteId))
+    dispatch(deleteToDo(deleteId));
     // try {
     //   setIsLoading(true);
     //   setError(null);
@@ -87,6 +90,7 @@ const error =useSelector(selectorsError);
           onDelete={handleDeleteItem}
         />
       )}
+      {showModal && <ModalWindows />}
     </>
   );
 }

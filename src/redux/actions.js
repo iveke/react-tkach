@@ -14,6 +14,8 @@ export const levelOnChange = (value) => {
     };
   };
 
+
+  export const modal = createAction("todo/modal")
 // EXAMPLE REDUX
 
 // export const addTask = (value) => {

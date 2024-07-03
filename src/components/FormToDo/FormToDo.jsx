@@ -29,7 +29,7 @@ class FormLogin extends Component {
       <Formik
         initialValues={intialValue}
         onSubmit={(values, { resetForm }) => {
-          console.log(values.level);
+
           this.props.onAdd(values);
           resetForm();
         }}

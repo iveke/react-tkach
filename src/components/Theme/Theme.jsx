@@ -7,7 +7,7 @@ function Theme() {
   // const [value, setValue] = useLocalStorage("theme", "dark");
 const themeColor = useSelector(state => state.theme.color);
 const dispatch = useDispatch();
-console.log(themeColor)
+
   // const handleClick = () => {
   //   setValue((state) => (state === "dark" ? "light" : "dark"));
   // };

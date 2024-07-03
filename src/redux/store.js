@@ -12,6 +12,7 @@ const initialStore = {
   // },
   todos: {
     list: [],
+    
   },
   form: {
     title: "",
@@ -22,8 +23,7 @@ const initialStore = {
 const myMiddleware = (store) => {
   return function (next) {
     return function (action) {
-      console.log(action.meta)
-      console.log("myMiddleWare", action);
+
       next(action)
     };
   };
@@ -53,7 +53,6 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleWare) => {
     const middleware = getDefaultMiddleWare();
-    console.log(middleware);
     return[...middleware, myMiddleware];
   },
 });
