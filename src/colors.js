@@ -6,3 +6,6 @@ export const colors = {
     YELLOW: "#FFFF00",
     GREEN: "#00DD70"
 }
+
+export const theme = {dark: "#000", light: "#fff"};
+export const themeText = {dark: "#fff", light: "#000"};

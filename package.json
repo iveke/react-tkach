@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://github.com/iveke/react-tkach",
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.5",
     "axios": "^1.6.8",
     "formik": "^2.4.5",
     "modern-normalize": "^2.0.0",
@@ -11,6 +12,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
+    "react-router-dom": "^6.23.0",
     "react-scripts": "5.0.1",
     "react-spinners": "^0.13.8",
     "styled-components": "^6.1.8",

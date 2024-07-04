@@ -1,19 +1,19 @@
 import { colors } from "constans.js";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const getColorLevel = ({ level }) => {
   switch (level) {
-    case 1:
+    case "easy":
       return colors.LEVEL_ONE;
-    case 2:
+    case "middle":
       return colors.LEVEL_TWO;
-    case 3:
+    case "hard":
       return colors.LEVEL_THREE;
     default:
       return "#000";
   }
 };
-const checkStatus = ({ status }) => (status ? colors.COMPLETE : "transparent");
 
 export const List = styled.ul`
   margin: 20px 0;
@@ -28,11 +28,10 @@ export const List = styled.ul`
 export const Item = styled.li`
   position: relative;
   padding: 10px 20px;
-  border: 1px solid ${getColorLevel};
-  background-color: ${checkStatus};
+  border: 2px solid ${getColorLevel};
 `;
 
-export const Title = styled.p`
+export const Title = styled(Link)`
   font-size: 10px;
   font-style: italic;
   font-weight: 700;
@@ -46,14 +45,14 @@ export const Text = styled.p`
 
 export const Level = styled.div`
   position: absolute;
-  top: 5px;
-  right: 10px;
+  top: 0;
+  right: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 25px;
+  width: 40px;
   height: 25px;
-  border: 1px solid ${(props)=> getColorLevel(props)};
+  border: 3px solid ${(props)=> getColorLevel(props)};
 `;
 
 
