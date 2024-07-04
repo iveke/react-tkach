@@ -3,7 +3,7 @@ import FormLogin from "components/FormToDo/FormToDo";
 import { Loader } from "components/Loader";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { createToDos } from "service/api";
+import { createToDo, createToDos } from "service/api";
 import { useDispatch, useSelector } from "react-redux";
 import { selectorsLoading } from "../redux/selectors";
 
@@ -14,7 +14,7 @@ function CreateTodo() {
   const dispatch = useDispatch();
 
   const handleAddItem = async (item) => {
-dispatch(createToDo(item))
+    dispatch(createToDo(item));
 
     // try {
     //   setIsLoading(true);
