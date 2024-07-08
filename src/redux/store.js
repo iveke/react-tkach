@@ -1,5 +1,5 @@
 // import persistStore from "redux-persist/es/persistStore";
-import { accountReducer } from "./slice/AccountSlice";
+import { accountPersistedReducer, accountReducer } from "./slice/AccountSlice";
 import { themeReducer } from "./slice/ThemeSlice";
 import { todoReducer } from "./slice/TodoSlice";
 import { configureStore } from "@reduxjs/toolkit";
@@ -16,15 +16,8 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist'
-import { loginReducer } from "./auth/slice";
+import { authPersisteReducer, loginReducer } from "./auth/slice";
 
-const persistConfig = {
-  key: 'root',
-  storage,
-  whitelist: ['balance'],
-}
-
-const accountPersistedReducer = persistReducer(persistConfig, accountReducer)
 
 
 const myMiddleware = (store) => {
@@ -43,7 +36,7 @@ export const store = configureStore({
     account: accountPersistedReducer,
     theme: themeReducer,
     todos: todoReducer,
-    login: loginReducer,
+    auth: authPersisteReducer,
   },
   middleware: (getDefaultMiddleware) =>
   getDefaultMiddleware({

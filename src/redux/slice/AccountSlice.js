@@ -1,4 +1,7 @@
 import { createAction, createReducer, createSlice } from "@reduxjs/toolkit";
+import persistReducer from "redux-persist/es/persistReducer";
+import storage from "redux-persist/lib/storage";
+
 
 // export const deposit = createAction("account/deposit");
 // export const withdraw = createAction("account/withdraw");
@@ -30,5 +33,14 @@ const AccountSlice = createSlice({
   },
 });
 
+
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['balance'],
+}
+
+
 export const { deposit, withdraw } = AccountSlice.actions;
 export const accountReducer = AccountSlice.reducer;
+export const accountPersistedReducer = persistReducer(persistConfig, accountReducer);

@@ -1,4 +1,4 @@
-export const selectorsIsRefresh = (state) => state.login.isRefresh;
-export const selectorsLogged = (state) => state.login.isLogged;
-export const selectorsToken = (state) => state.login.token;
-export const selectorsUser = (state) => state.login.user;
+export const selectorsIsRefresh = (state) => state.auth.isRefresh;
+export const selectorsLogged = (state) => state.auth.isLogged;
+export const selectorsToken = (state) => state.auth.token;
+export const selectorsUser = (state) => state.auth.user;

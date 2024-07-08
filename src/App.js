@@ -11,7 +11,8 @@ import { lazy } from "react";
 import { Login } from "pages/PageLogin";
 import Account from "components/Account/Account";
 import { Register } from "pages/PageRegister";
-import { PrivateRoute } from "components/PrivateRoute/PrivateRoute";
+import { PrivateRoute } from "components/auth/PrivateRoute";
+import { BoundingRoute } from "components/auth/BoundingRoute";
 
 // const Home = lazy(()=> import('./pages/Home'));
 
@@ -25,9 +26,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />}/>
-          <Route path="login" element={<Login />}/> 
-          <Route path="register" element={<Register />}/>
-          <Route path="account"  element={<PrivateRoute redirect="/login" element={<Account />} />}/>
+          <Route path="login" element={<BoundingRoute redirect="/account" component={Login} />}/> 
+          <Route path="register" element={<BoundingRoute redirect="/account" component={Register} />}/>
+          <Route path="account"  element={<PrivateRoute redirect="/login" component={Account} />}/>
           <Route path="createTodo" element={<CreateTodo />} />
           <Route path="todo" element={<Todo />} />
           <Route path="todo/:id" element={<TodoDetails />} />
