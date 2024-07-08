@@ -19,6 +19,9 @@ function Layout() {
         <PagesLink>
           <StyleLink to="/todo">todo</StyleLink>
         </PagesLink>
+        <PagesLink>
+          <StyleLink to="/login">Login</StyleLink>
+        </PagesLink>
       
       </Menu>
       <Outlet />

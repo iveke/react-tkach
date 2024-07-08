@@ -26,7 +26,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />}/>
           <Route path="login" element={<Login />}/> 
-           <Route path="register" element={<Register />}/>
+          <Route path="register" element={<Register />}/>
           <Route path="account"  element={<PrivateRoute redirect="/login" element={<Account />} />}/>
           <Route path="createTodo" element={<CreateTodo />} />
           <Route path="todo" element={<Todo />} />
