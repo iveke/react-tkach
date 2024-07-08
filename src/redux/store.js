@@ -1,24 +1,30 @@
+// import persistStore from "redux-persist/es/persistStore";
 import { accountReducer } from "./slice/AccountSlice";
 import { themeReducer } from "./slice/ThemeSlice";
 import { todoReducer } from "./slice/TodoSlice";
 import { configureStore } from "@reduxjs/toolkit";
+import storage from "redux-persist/lib/storage";
+// import persistReducer from "redux-persist/es/persistReducer";
+import { loginReducer } from "./slice/LoginSlice";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist'
 
-const initialStore = {
-  // account: {
-  //   balance: 10,
-  // },
-  // theme: {
-  //   color: "white",
-  // },
-  todos: {
-    list: [],
-    
-  },
-  form: {
-    title: "",
-    level: "all",
-  },
-};
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['balance'],
+}
+
+const accountPersistedReducer = persistReducer(persistConfig, accountReducer)
+
 
 const myMiddleware = (store) => {
   return function (next) {
@@ -29,33 +35,24 @@ const myMiddleware = (store) => {
   };
 };
 
-const myMiddleware2 = (store) => {
-  return function (next) {
-    return function (action) {
-     
-      console.log("myMiddleWare", action);
-      next(action)
-    };
-  };
-};
-
-const myMiddleWare1 =(store)=>(next)=>(action)=>{
-  console.log("myMiddleware2", action);
-  next(action)
-}
 
 // export const store = createStore(rootReducer, enhancer);
 export const store = configureStore({
   reducer: {
-    account: accountReducer,
+    account: accountPersistedReducer,
     theme: themeReducer,
     todos: todoReducer,
+    login: loginReducer,
   },
-  middleware: (getDefaultMiddleWare) => {
-    const middleware = getDefaultMiddleWare();
-    return[...middleware, myMiddleware];
-  },
-});
+  middleware: (getDefaultMiddleware) =>
+  getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }),
+})
+
+export const persister = persistStore(store);
 
 // case "todos/upload":
 //   return {

@@ -4,9 +4,10 @@ import App from "./App";
 import GlobalStyle from "GlobalStyle.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { store } from "./redux/store";
+import { persister, store } from "./redux/store";
 import Account from "components/Account/Account";
 import Theme from "components/Theme/Theme";
+import { PersistGate } from "redux-persist/integration/react";
 export const rootModal = document.querySelector("#modals");
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -15,9 +16,10 @@ root.render(
     <BrowserRouter basename="mysite">
       <GlobalStyle />
       <Provider store={store}>
-      <App />
+        <PersistGate Loading={null} persistor={persister}>
+        <App />
+        </PersistGate>
       </Provider>
-     
     </BrowserRouter>
     <Account />
     <Theme />
