@@ -7,7 +7,6 @@ import Todo from "pages/PageTodo";
 import TodoDetails from "pages/PageTodoDetails";
 import Layout from "components/Layout/Layout";
 import Home from "pages/Home";
-import { lazy } from "react";
 import { Login } from "pages/PageLogin";
 import Account from "components/Account/Account";
 import { Register } from "pages/PageRegister";
@@ -26,9 +25,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />}/>
-          <Route path="login" element={<BoundingRoute redirect="/account" component={Login} />}/> 
-          <Route path="register" element={<BoundingRoute redirect="/account" component={Register} />}/>
-          <Route path="account"  element={<PrivateRoute redirect="/login" component={Account} />}/>
+          <Route path="login" element={<BoundingRoute redirect="/todo" component={Login} />}/> 
+          <Route path="register" element={<BoundingRoute redirect="/todo" component={Register} />}/>
+          <Route path="account"  element={<PrivateRoute redirect="/login" component={Account} />}/> 
           <Route path="createTodo" element={<CreateTodo />} />
           <Route path="todo" element={<Todo />} />
           <Route path="todo/:id" element={<TodoDetails />} />

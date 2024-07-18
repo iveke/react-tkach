@@ -1,6 +1,6 @@
-'use strict'
 
-import { createAction, createSlice } from "@reduxjs/toolkit";
+
+import { createSlice } from "@reduxjs/toolkit";
 
 // export const themeReducer = (state = { color: "white" }, action) => {
 

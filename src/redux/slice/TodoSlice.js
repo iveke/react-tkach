@@ -1,7 +1,7 @@
-import { createAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { modal } from "../actions";
 import { createToDo, deleteToDo, fetchToDos, putToDo } from "service/api";
-import CreateTodo from "pages/PageCreateToDo";
+// import CreateTodo from "pages/PageCreateToDo";
 
 const TodoSlice = createSlice({
   name: "todo",

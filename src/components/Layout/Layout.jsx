@@ -1,16 +1,15 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { Menu, PagesLink, StyleLink } from "./Layout.style";
-
-
+import { useDispatch } from "react-redux";
+import { logOut } from "../../redux/auth/operation";
 
 
 function Layout() {
-
-
-    return (
-      <>
+  const dispatch = useDispatch()
+  return (
+    <>
       <Menu>
-      <PagesLink>
+        <PagesLink>
           <StyleLink to="/">Home</StyleLink>
         </PagesLink>
         <PagesLink>
@@ -22,13 +21,18 @@ function Layout() {
         <PagesLink>
           <StyleLink to="/login">Login</StyleLink>
         </PagesLink>
-      
+        <PagesLink>
+          <StyleLink to="/register">Register</StyleLink>
+        </PagesLink>
+        <PagesLink>
+          <StyleLink to="/account">Account</StyleLink>
+        </PagesLink>
+        <button onClick={()=>dispatch(logOut)}>Log out</button>
+
       </Menu>
       <Outlet />
-      </>
-        
-      
-    )
+    </>
+  );
 }
 
 export default Layout;

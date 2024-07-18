@@ -3,7 +3,7 @@ import FormLogin from "components/FormToDo/FormToDo";
 import { Loader } from "components/Loader";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { createToDo, createToDos } from "service/api";
+import { createToDo } from "service/api";
 import { useDispatch, useSelector } from "react-redux";
 import { selectorsLoading } from "../redux/selectors";
 

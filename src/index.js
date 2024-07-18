@@ -21,7 +21,7 @@ root.render(
         </PersistGate>
       </Provider>
     </BrowserRouter>
-    <Account />
-    <Theme />
+    {/* <Account />
+    <Theme /> */}
   </Provider>
 );
